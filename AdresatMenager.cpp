@@ -1,15 +1,10 @@
 #include "AdresatMenager.h"
 
-AdresatMenager::AdresatMenager(string nazwaPlikuZAdresatami)
-:plikZAdresatami(nazwaPlikuZAdresatami)
+AdresatMenager::AdresatMenager(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
+:plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika)
 {
-    idOstatniegoAdresata = 0;
     idUsunietegoAdresata = 0;
-}
-
-void AdresatMenager::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika)
-{
-    idOstatniegoAdresata = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);
+    adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
 }
 
 void AdresatMenager::wyswietlWszystkichAdresatow()
@@ -42,31 +37,24 @@ void AdresatMenager::wyswietlDaneAdresata(Adresat adresat)
     cout << "Adres:              " << adresat.pobierzAdres() << endl;
 }
 
-void AdresatMenager::wyczyscWektorAdresatow()
-{
-    adresaci.clear();
-}
-
-void AdresatMenager::dodajAdresata(int idZalogowanegoUzytkownika)
+void AdresatMenager::dodajAdresata()
 {
     Adresat adresat;
 
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata(idZalogowanegoUzytkownika);
+    adresat = podajDaneNowegoAdresata();
 
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
-
-    ++idOstatniegoAdresata;
 }
 
-Adresat AdresatMenager::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
+Adresat AdresatMenager::podajDaneNowegoAdresata()
 {
     Adresat adresat;
 
-    adresat.ustawId(++idOstatniegoAdresata);
-    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
+    adresat.ustawId(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);
+    adresat.ustawIdUzytkownika(ID_ZALOGOWWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
     adresat.ustawImie(MetodyPomocnicze::wczytajLinie());

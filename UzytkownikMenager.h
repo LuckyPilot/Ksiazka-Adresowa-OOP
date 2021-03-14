@@ -1,8 +1,6 @@
 #ifndef UZYTKOWNIKMENAGER_H_INCLUDED
 #define UZYTKOWNIKMENAGER_H_INCLUDED
 
-#include <vector>
-#include <windows.h>
 #include "Uzytkownik.h"
 #include "PlikZUzytkownikami.h"
 #include "MetodyPomocnicze.h"
@@ -28,10 +26,10 @@ public:
 
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
-    void wczytajUzytkownikowZPliku();
     void logowanieUzytkownika();
     void wylogowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
+    bool czyUzytkownikJestZalogowany();
 };
 
 #endif // UZYTKOWNIKMENAGER_H_INCLUDED

@@ -1,9 +1,15 @@
 #include "KsiazkaAdresowa.h"
 
 KsiazkaAdresowa::KsiazkaAdresowa(string nazwaPlikuZUzytkownikami, string nazwaPlikuZAdresatami)
-: uzytkownikMenager(nazwaPlikuZUzytkownikami), adresatMenager(nazwaPlikuZAdresatami)
+: uzytkownikMenager(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami)
 {
-    uzytkownikMenager.wczytajUzytkownikowZPliku();
+    adresatMenager = NULL;
+}
+
+KsiazkaAdresowa::~KsiazkaAdresowa()
+{
+    delete adresatMenager;
+    adresatMenager = NULL;
 }
 
 void KsiazkaAdresowa::rejestracjaUzytkownika()
@@ -19,14 +25,15 @@ void KsiazkaAdresowa::wypiszWszystkichUzytkownikow()
 void KsiazkaAdresowa::logowanieUzytkownika()
 {
     uzytkownikMenager.logowanieUzytkownika();
-    if (uzytkownikMenager.pobierzIdZalogowanegoUzytkownika() != 0)
-        adresatMenager.wczytajAdresatowZalogowanegoUzytkownikaZPliku(uzytkownikMenager.pobierzIdZalogowanegoUzytkownika());
+    if (uzytkownikMenager.czyUzytkownikJestZalogowany())
+        adresatMenager = new AdresatMenager(NAZWA_PLIKU_Z_ADRESATAMI,uzytkownikMenager.pobierzIdZalogowanegoUzytkownika());
 }
 
 void KsiazkaAdresowa::wylogowanieUzytkownika()
 {
     uzytkownikMenager.wylogowanieUzytkownika();
-    adresatMenager.wyczyscWektorAdresatow();
+    delete adresatMenager;
+    adresatMenager = NULL;
 }
 
 void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
@@ -36,10 +43,24 @@ void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
 
 void KsiazkaAdresowa::wyswietlWszystkichAdresatow()
 {
-    adresatMenager.wyswietlWszystkichAdresatow();
+    if (uzytkownikMenager.czyUzytkownikJestZalogowany())
+        adresatMenager->wyswietlWszystkichAdresatow();
+    else
+        cout << "Aby wyswietlic wszystkich adresatow nalezy najpierw sie zalogowac" << endl;
 }
 
 void KsiazkaAdresowa::dodajAdresata()
 {
-    adresatMenager.dodajAdresata(uzytkownikMenager.pobierzIdZalogowanegoUzytkownika());
+    if (uzytkownikMenager.czyUzytkownikJestZalogowany())
+        adresatMenager->dodajAdresata();
+    else
+        cout << "Aby dodac adresata nalezy najpierw sie zalogowac" << endl;
+}
+
+bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
+{
+    if (uzytkownikMenager.czyUzytkownikJestZalogowany())
+        return true;
+    else
+        return false;
 }

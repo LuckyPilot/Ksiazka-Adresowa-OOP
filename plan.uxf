@@ -5,32 +5,36 @@
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>160</y>
+      <y>250</y>
       <w>330</w>
       <h>320</h>
     </coordinates>
     <panel_attributes>Ksiazka adresowa
 --
 - uzytkownikMenager : UzytkownikMenager
-- adresatMenager : AdresatMenager
+- adresatMenager : AdresatMenager*
+- NAZWA_PLIKU_Z_ADRESATAMI : string
 --
 + KsiazkaAdresowa()
++ ~KsiazkaAdresowa()
 + rejestracjaUzytkownika() : void
 + logowanieUzytkownika() : void
 + wylogowanieUzytkownika() : void
 + zmianaHaslaZalogowanegoUzytkownika() : void
 + wypiszWszystkichUzytkownikow : void
 + dodajAdresata() : void
++ wyswietlWszystkichAdresatow : void
++ czyUzytkownikJestZalogowany : bool
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1200</x>
-      <y>170</y>
-      <w>180</w>
-      <h>150</h>
+      <x>1340</x>
+      <y>100</y>
+      <w>160</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>Uzytkownik
 --
@@ -45,7 +49,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>160</y>
+      <y>250</y>
       <w>350</w>
       <h>320</h>
     </coordinates>
@@ -58,10 +62,10 @@
 + UzytkownikMenager()
 + rejestracjaUzytkownika() : void
 + wypiszWszystkichUzytkownikow() : void
-+ wczytajUzytkownikowZPliku() : void
 + logowanieUzytkownika() : void
 + wylogowanieUzytkownika() : void
 + zmianaHaslaZalogowanegoUzytkownika() : void
++ czyUzytkownikJestZalogowany() : bool
 - podajDaneNowegoUzytkownika() : Uzytkownik
 - pobierzIdNowegoUzytkownika() : int
 - czyIstniejeLogin() : bool
@@ -74,13 +78,13 @@
     <id>UMLClass</id>
     <coordinates>
       <x>780</x>
-      <y>150</y>
-      <w>360</w>
-      <h>270</h>
+      <y>240</y>
+      <w>530</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>PlikZUzytkownikami
 --
-- nazwaPlikuZUzytkownikami : const string
+- NAZWA_PLIKU_Z_UZYTKOWNIKAMI : string
 --
 + PlikZUzytkownikami()
 + dopiszUzytkownikaDoPliku() : void
@@ -94,10 +98,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1040</x>
-      <y>790</y>
-      <w>220</w>
-      <h>130</h>
+      <x>1120</x>
+      <y>880</y>
+      <w>410</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --
@@ -105,14 +109,15 @@
 + konwerjsaIntNaString() : string
 + wczytajLinie() : string
 + konwersjaStringNaInt() : int
-+ zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string</panel_attributes>
++ zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string
++ pobierzLiczbe() : string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1200</x>
-      <y>350</y>
+      <x>1330</x>
+      <y>220</y>
       <w>180</w>
       <h>190</h>
     </coordinates>
@@ -132,22 +137,20 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
-      <y>530</y>
+      <x>350</x>
+      <y>600</y>
       <w>350</w>
       <h>290</h>
     </coordinates>
     <panel_attributes>AdresatMenager
 --
-- idOstatniegoAdresata : int
+- ID_ZALOGOWWANEGO_UZYTKOWNIKA : int
 - idUsunietegoAdresata : int
 - adresaci : vector&lt;Adresat&gt;
 - plikZAdresatami : PlikZAdresatami
 --
 + AdresatMenager()
-+ wczytajAdresatowZalogowanegoUzytkownikaZPliku() : int
 + wyswietlWszystkichAdresatow : void
-+ wyczyscWektorAdresatow() : void
 + dodajAdresata() : void
 - wyswietlDaneAdresata : void
 - podajDaneNowegoAdresata : Adresat</panel_attributes>
@@ -157,21 +160,21 @@
     <id>UMLClass</id>
     <coordinates>
       <x>780</x>
-      <y>460</y>
-      <w>360</w>
-      <h>300</h>
+      <y>550</y>
+      <w>530</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>PlikZAdresatami
 --
-- nazwaPlikuZAdresatami : const string
-- nazwaTymczasowegoPlikuZAdresatami : const string
+- iDOstatniegoAdresata : int
+- NAZWA_PLIKU_Z_ADRESATAMI : string
+- NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI : string
 --
 + PlikZAdresatami()
-+ wczytajAdresatowZalogowanegoUzytkownikaZPliku() : int
++ wczytajAdresatowZalogowanegoUzytkownikaZPliku() : vector&lt;Adresat&gt;
 + dopiszAdresataDoPliku() : void
 - pobierzIdAdresataZDanychOddzielonychPionowymiKreskami() : int
 - pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami() : int
-- pobierzLiczbe() : string
 - pobierzDaneAdresata() : Adresat
 - zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami() : string
 - czyPlikJestPusty() : bool</panel_attributes>

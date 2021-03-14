@@ -14,6 +14,7 @@ public:
      static string wczytajLinie();
      static int konwersjaStringNaInt(string liczba);
      static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
+     static string pobierzLiczbe(string tekst, int pozycjaZnaku);
 };
 
 #endif // METODYPOMOCNICZE_H_INCLUDED
