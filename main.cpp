@@ -1,20 +1,19 @@
-#include "Functions.h"
 #include "KsiazkaAdresowa.h"
 
 using namespace std;
 
 int main()
 {
-    char wybor;
+
     KsiazkaAdresowa ksiazkaAdresowa;
 
     while (true)
     {
         if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany())
         {
-            wybor = wybierzOpcjeZMenuGlownego();
+            ksiazkaAdresowa.wybierzOpcjeZMenuGlownego();
 
-            switch (wybor)
+            switch (ksiazkaAdresowa.pobierzWybor())
             {
             case '1':
                 ksiazkaAdresowa.rejestracjaUzytkownika();
@@ -33,28 +32,27 @@ int main()
         }
         else
         {
-            wybor = wybierzOpcjeZMenuUzytkownika();
+            ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
 
-            switch (wybor)
+            switch (ksiazkaAdresowa.pobierzWybor())
             {
             case '1':
                 ksiazkaAdresowa.dodajAdresata();
                 break;
             case '2':
-                //wyszukajAdresatowPoImieniu(adresaci);
+                ksiazkaAdresowa.wyszukajAdresatowPoImieniu();
                 break;
             case '3':
-                //wyszukajAdresatowPoNazwisku(adresaci);
+                ksiazkaAdresowa.wyszukajAdresatowPoNazwisku();
                 break;
             case '4':
                 ksiazkaAdresowa.wyswietlWszystkichAdresatow();
                 break;
             case '5':
-                //idUsunietegoAdresata = usunAdresata(adresaci);
-                //idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
+                ksiazkaAdresowa.usunWybranegoAdresata();
                 break;
             case '6':
-                //edytujAdresata(adresaci);
+                ksiazkaAdresowa.edytujWybranegoAdresata();
                 break;
             case '7':
                 ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();

@@ -5,15 +5,16 @@
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>250</y>
-      <w>330</w>
-      <h>320</h>
+      <y>120</y>
+      <w>320</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>Ksiazka adresowa
 --
 - uzytkownikMenager : UzytkownikMenager
 - adresatMenager : AdresatMenager*
 - NAZWA_PLIKU_Z_ADRESATAMI : string
+- wybor : char
 --
 + KsiazkaAdresowa()
 + ~KsiazkaAdresowa()
@@ -23,16 +24,22 @@
 + zmianaHaslaZalogowanegoUzytkownika() : void
 + wypiszWszystkichUzytkownikow : void
 + dodajAdresata() : void
-+ wyswietlWszystkichAdresatow : void
-+ czyUzytkownikJestZalogowany : bool
++ wyswietlWszystkichAdresatow() : void
++ czyUzytkownikJestZalogowany() : bool
++ wybierzOpcjeZMenuGlownego() : void
++ wybierzOpcjeZMenuUzytkownika() : void
++ wyszukajAdresatowPoImieniu() : void
++ wyszukajAdresatowPoNazwisku() : void
++ usunWybranegoAdresata() : void
++ edytujWybranegoAdresata() : void
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1340</x>
-      <y>100</y>
+      <x>1350</x>
+      <y>320</y>
       <w>160</w>
       <h>110</h>
     </coordinates>
@@ -49,9 +56,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>250</y>
-      <w>350</w>
-      <h>320</h>
+      <y>120</y>
+      <w>340</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>UzytkownikMenager
 --
@@ -77,20 +84,18 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>780</x>
-      <y>240</y>
-      <w>530</w>
-      <h>300</h>
+      <x>750</x>
+      <y>310</y>
+      <w>540</w>
+      <h>150</h>
     </coordinates>
-    <panel_attributes>PlikZUzytkownikami
+    <panel_attributes>PlikZUzytkownikami : PlikTekstowy
 --
-- NAZWA_PLIKU_Z_UZYTKOWNIKAMI : string
 --
 + PlikZUzytkownikami()
 + dopiszUzytkownikaDoPliku() : void
 + wczytajUzytkownikowZPliku() : vector&lt;Uzytkownik&gt;
 + zapiszWszystkichUzytkownikowDoPliku() : void
-- czyPlikJestPusty() : bool
 - zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami() : string
 - pobierzDaneUzytkownika() : Uzytkownik</panel_attributes>
     <additional_attributes/>
@@ -98,10 +103,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1120</x>
-      <y>880</y>
+      <x>1190</x>
+      <y>110</y>
       <w>410</w>
-      <h>140</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --
@@ -110,14 +115,16 @@
 + wczytajLinie() : string
 + konwersjaStringNaInt() : int
 + zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string
-+ pobierzLiczbe() : string</panel_attributes>
++ pobierzLiczbe() : string
++ wczytajZnak() : char
++ wczytajLiczbeCalkowita() : int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1330</x>
-      <y>220</y>
+      <x>1350</x>
+      <y>500</y>
       <w>180</w>
       <h>190</h>
     </coordinates>
@@ -137,47 +144,74 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>600</y>
+      <x>360</x>
+      <y>390</y>
       <w>350</w>
-      <h>290</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>AdresatMenager
 --
 - ID_ZALOGOWWANEGO_UZYTKOWNIKA : int
-- idUsunietegoAdresata : int
 - adresaci : vector&lt;Adresat&gt;
 - plikZAdresatami : PlikZAdresatami
 --
 + AdresatMenager()
 + wyswietlWszystkichAdresatow : void
 + dodajAdresata() : void
++ wyszukajAdresatowPoImieniu() : void
++ wyszukajAdresatowPoNazwisku() : void
++ usunWybranegoAdresata() : void
++ edytujWybranegoAdresata() : void
 - wyswietlDaneAdresata : void
-- podajDaneNowegoAdresata : Adresat</panel_attributes>
+- podajDaneNowegoAdresata : Adresat
+- wyswietlIloscWyszukanychAdresatow() : void
+- podajIdWybranegoAdresata() : int
+- usunWybranegoAdresataZPliku() : void
+- wybierzOpcjeZMenuEdycja() : char
+- zaktualizujDaneWybranegoAdresataWPliku() : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>780</x>
-      <y>550</y>
+      <x>760</x>
+      <y>490</y>
       <w>530</w>
-      <h>310</h>
+      <h>260</h>
     </coordinates>
-    <panel_attributes>PlikZAdresatami
+    <panel_attributes>PlikZAdresatami : PlikTekstowy
 --
 - iDOstatniegoAdresata : int
-- NAZWA_PLIKU_Z_ADRESATAMI : string
-- NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI : string
+- NAZWA_TYMCZASOWEGO_PLIKU : string
 --
 + PlikZAdresatami()
 + wczytajAdresatowZalogowanegoUzytkownikaZPliku() : vector&lt;Adresat&gt;
 + dopiszAdresataDoPliku() : void
++ usunWybranegoAdresataZPliku() : void
++ edytujWybranegoAdresataWPliku() : void
 - pobierzIdAdresataZDanychOddzielonychPionowymiKreskami() : int
 - pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami() : int
 - pobierzDaneAdresata() : Adresat
 - zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami() : string
-- czyPlikJestPusty() : bool</panel_attributes>
+- usunPlik() : void
+- zmienNazwePliku() : void
+- pobierzZPlikuIdOstatniegoAdresata() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>170</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>PlikTekstowy
+--
+# NAZWA_PLIKU : string
+--
++ PlikTekstowy() 
++ czyPlikJestPusty() : bool</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
