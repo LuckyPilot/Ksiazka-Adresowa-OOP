@@ -4,10 +4,8 @@ PlikTekstowy::PlikTekstowy(string nazwaPliku)
 : NAZWA_PLIKU(nazwaPliku)
 {}
 
-bool PlikTekstowy::czyPlikJestPusty()
+bool PlikTekstowy::czyPlikJestPusty(fstream& plikTekstowy)
 {
-    fstream plikTekstowy;
-
     plikTekstowy.seekg(0, ios::end);
     if (plikTekstowy.tellg() == 0)
         return true;

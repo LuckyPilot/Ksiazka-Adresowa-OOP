@@ -12,7 +12,7 @@ protected:
 
 public:
     PlikTekstowy(string nazwaPliku);
-    bool czyPlikJestPusty();
+    bool czyPlikJestPusty(fstream& plikTekstowy);
 };
 
 #endif // PLIKTEKSTOWY_H_INCLUDED
